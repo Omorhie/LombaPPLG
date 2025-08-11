@@ -1,5 +1,19 @@
-document.getElementById("menuToggle").addEventListener("click", function() {
-  document.getElementById("navLinks").classList.toggle("show");
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+// Buat overlay background
+const overlay = document.createElement("div");
+overlay.classList.add("nav-overlay");
+document.body.appendChild(overlay);
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
+  overlay.classList.toggle("show");
+});
+
+overlay.addEventListener("click", () => {
+  navLinks.classList.remove("show");
+  overlay.classList.remove("show");
 });
 
 // Data materi
