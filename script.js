@@ -1,10 +1,9 @@
-// Navbar scroll effect
+
 window.addEventListener("scroll", () => {
   const nav = document.querySelector("nav");
   nav.classList.toggle("scrolled", window.scrollY > 50);
 });
 
-// Hamburger menu toggle
 const menuToggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
 
@@ -17,31 +16,29 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         intro.style.opacity = "0";
         intro.style.visibility = "hidden";
-    }, 2500); // Durasi sebelum hilang
+    }, 2500); 
 });
 
 
 
-// Saat halaman dimuat, cek halaman terakhir
 window.addEventListener('load', function () {
     const lastPage = localStorage.getItem('lastPage');
     if (lastPage) {
-        showPage(lastPage); // Fungsi showPage sudah ada di code-mu
+        showPage(lastPage); 
     } else {
-        showPage('home'); // Default ke home kalau belum ada data
+        showPage('home');
     }
 });
 
 document.getElementById("btn-mulai").addEventListener("click", function(e) {
-  e.preventDefault(); // supaya gak reload halaman
-  showListMateri();   // panggil fungsi untuk tampilkan daftar materi
+  e.preventDefault(); 
+  showListMateri();  
 });
 
 
 
 
 
-// Data materi
 const materiData = [
   {
     id: 1,
@@ -78,7 +75,6 @@ const materiData = [
 
 
 
-// DOM references
 const listMateriSection = document.getElementById("materi-list");
 const materiGrid = document.getElementById("materi-grid");
 const materiDetailSection = document.getElementById("materi-detail");
@@ -104,7 +100,6 @@ const quizFeedback = document.getElementById("quiz-feedback");
 
 let currentCarousel = 0;
 
-// Carousel functions
 const carouselContainer = document.querySelector(".carousel-container");
 function initCarousel() {
   const carousel = document.querySelector(".carousel");
@@ -123,7 +118,6 @@ function initCarousel() {
     showCarouselSlide(currentCarousel);
   });
 
-  // Auto slide setiap 5 detik
   setInterval(() => {
     currentCarousel = (currentCarousel + 1) % carouselItems.length;
     showCarouselSlide(currentCarousel);
@@ -132,7 +126,6 @@ function initCarousel() {
   showCarouselSlide(currentCarousel);
 }
 
-// Render grid materi
 function renderGridMateri() {
   materiGrid.innerHTML = "";
   materiData.forEach(materi => {
@@ -190,7 +183,6 @@ function showMateriDetail(materi) {
   `;
 }
 
-// Data quiz (jika sudah ada, gunakan yang ini atau gabungkan)
 const quizData = [
   {
     question: "Apa kepanjangan dari HTML?",
@@ -289,8 +281,6 @@ const quizData = [
   }
 ];
 
-
-// helper shuffle (Fisher-Yates)
 function shuffleArray(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -299,15 +289,12 @@ function shuffleArray(a) {
   return a;
 }
 
-// globals quiz
 let currentQuizIndex = 0;
 let score = 0;
 let shuffledQuizData = [];
 
-// DOM container (harus ada di HTML)
 const quizContainer = document.getElementById("quiz-container");
 
-// render UI dasar quiz (dipanggil setiap start/restart)
 function renderQuizUI() {
   quizContainer.innerHTML = `
     <p id="quiz-question"></p>
@@ -318,51 +305,39 @@ function renderQuizUI() {
     <p id="quiz-feedback" style="margin-top:10px;"></p>
   `;
 
-  // Jangan attach listener di luar; gunakan named handler
   const nextBtn = document.getElementById("next-question-btn");
-  nextBtn.removeEventListener?.("click", onNextQuestion); // safe-remove (bila didukung)
+  nextBtn.removeEventListener?.("click", onNextQuestion);
   nextBtn.addEventListener("click", onNextQuestion);
 }
 
-// start / restart quiz
 function startQuiz() {
-  // reset state
   score = 0;
   currentQuizIndex = 0;
 
-  // duplikat dan acak soal
   shuffledQuizData = shuffleArray([...quizData]);
 
-  // render UI & tampilkan soal pertama
   renderQuizUI();
   showQuestion();
-  // pastikan section quiz ditampilkan oleh kode navigasimu
 }
 
-// tampilkan soal saat ini
 function showQuestion() {
-  // ambil elemen yang baru dibuat
   const questionEl = document.getElementById("quiz-question");
   const optionsEl = document.getElementById("quiz-options");
   const nextBtn = document.getElementById("next-question-btn");
   const feedbackEl = document.getElementById("quiz-feedback");
 
-  // safety
   if (!shuffledQuizData.length) return;
 
-  // bersihkan UI
   optionsEl.innerHTML = "";
   feedbackEl.textContent = "";
   nextBtn.disabled = true;
 
   const current = shuffledQuizData[currentQuizIndex];
 
-  // acak opsi
   const options = shuffleArray([...current.options]);
 
   questionEl.textContent = `Q${currentQuizIndex + 1}. ${current.question}`;
 
-  // buat tombol opsi
   options.forEach(opt => {
     const li = document.createElement("li");
     li.style.marginBottom = "8px";
@@ -379,7 +354,6 @@ function showQuestion() {
     btn.style.color = "white";
     btn.style.fontWeight = "600";
 
-    // handler pilihan
     btn.addEventListener("click", () => selectAnswer(btn, opt));
 
     li.appendChild(btn);
@@ -387,16 +361,13 @@ function showQuestion() {
   });
 }
 
-// ketika user pilih jawaban
 function selectAnswer(buttonClicked, selectedOption) {
   const current = shuffledQuizData[currentQuizIndex];
   const feedbackEl = document.getElementById("quiz-feedback");
   const nextBtn = document.getElementById("next-question-btn");
 
-  // disable semua tombol opsi
   document.querySelectorAll(".quiz-option-btn").forEach(b => b.disabled = true);
 
-  // reset warna opsi (untuk safety)
   document.querySelectorAll(".quiz-option-btn").forEach(b => {
     b.style.opacity = "0.95";
   });
@@ -405,14 +376,13 @@ function selectAnswer(buttonClicked, selectedOption) {
     score++;
     feedbackEl.textContent = "Benar! 🎉";
     feedbackEl.style.color = "green";
-    buttonClicked.style.background = "#28a745"; // hijau
+    buttonClicked.style.background = "#28a745";
     buttonClicked.style.color = "white";
   } else {
     feedbackEl.textContent = `Salah! Jawaban benar: ${current.answer}`;
     feedbackEl.style.color = "red";
-    buttonClicked.style.background = "#dc3545"; // merah
+    buttonClicked.style.background = "#dc3545";
     buttonClicked.style.color = "white";
-    // tandai jawaban benar
     document.querySelectorAll(".quiz-option-btn").forEach(b => {
       if (b.textContent === current.answer) {
         b.style.background = "#28a745";
@@ -424,7 +394,6 @@ function selectAnswer(buttonClicked, selectedOption) {
   nextBtn.disabled = false;
 }
 
-// handler next (named so add/remove safe)
 function onNextQuestion() {
   currentQuizIndex++;
   if (currentQuizIndex < shuffledQuizData.length) {
@@ -434,7 +403,6 @@ function onNextQuestion() {
   }
 }
 
-// tampilkan hasil akhir dan tombol restart
 function showQuizResult() {
   quizContainer.innerHTML = `
     <div>
@@ -446,18 +414,14 @@ function showQuizResult() {
     </div>
   `;
 
-  // attach restart listener (fresh)
   const restartBtn = document.getElementById("restart-quiz-btn");
   restartBtn.addEventListener("click", () => {
-    // restart dipastikan membersihkan dan memulai ulang
     startQuiz();
   });
 
-  // (opsional) simpan skor ke server / localStorage di sini
 }
 
 
-// Navigasi
 navHome.addEventListener("click", e => {
   e.preventDefault();
   showHome();
@@ -495,7 +459,6 @@ navQuiz.addEventListener("click", e => {
   e.preventDefault();
   quizSection.classList.remove("hidden");
 
-  // Sembunyikan carousel dan tombolnya
   carouselContainer.classList.add("hidden");
   prevBtn.classList.add("hidden");
   nextBtn.classList.add("hidden");
@@ -508,13 +471,11 @@ navQuiz.addEventListener("click", e => {
 });
 
 
-// FAQ toggle
 document.querySelectorAll(".faq-question").forEach(button => {
   button.addEventListener("click", () => {
     const answer = button.nextElementSibling;
     const isExpanded = button.getAttribute("aria-expanded") === "true";
 
-    // Tutup semua yang terbuka
     document.querySelectorAll(".faq-question").forEach(btn => {
       btn.setAttribute("aria-expanded", "false");
       btn.nextElementSibling.hidden = true;
@@ -527,7 +488,6 @@ document.querySelectorAll(".faq-question").forEach(button => {
   });
 });
 
-// Inisialisasi awal
 function init() {
   initCarousel();
   showHome();

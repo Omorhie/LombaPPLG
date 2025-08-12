@@ -1,4 +1,4 @@
-/* Reset dan dasar */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -21,7 +21,6 @@ body {
   padding: 0 15px;
 }
 
-/* Navbar */
 .navbar {
   background-color: #0077ff;
   color: white;
@@ -37,7 +36,7 @@ body {
 }
 
 .logo {
-  margin-right: auto; /* push menu ke kanan */
+  margin-right: auto;
 }
 
 .logo {
@@ -65,7 +64,6 @@ body {
   background-color: rgba(255 255 255 / 0.2);
 }
 
-/* Main */
 main {
   flex: 1 0 auto;
   padding: 20px 15px 40px;
@@ -74,7 +72,6 @@ main {
   width: 100%;
 }
 
-/* Home Text */
 .home-text {
   max-width: 700px;
   margin: 50px auto 60px;
@@ -118,35 +115,39 @@ main {
 }
 
 
-/* Carousel */
 .carousel-container {
   position: relative;
   max-width: 800px;
-  max-height: 400px;
+  width: 100%;
+  height: 400px;
   margin: 20px auto 40px;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.carousel {
-  display: flex;
-  width: 300%;
-  transition: transform 0.5s ease-in-out;
-}
-
 .carousel-item {
   flex: 0 0 100%;
+  height: 100%;
 }
 
 .carousel-item img {
-  width: 800px;
+  width: 100%;
   height: 400px;
   object-fit: cover;
-  background-color: #f4f6f8;
+  object-position: top center;
   display: block;
   border-radius: 8px;
 }
+
+
+.carousel {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+
 
 .prev-btn,
 .next-btn {
@@ -178,7 +179,6 @@ main {
   right: 10px;
 }
 
-/* Materi Grid Card */
 .materi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -220,30 +220,26 @@ main {
   margin-bottom: 20px;
 }
 
-/* Container materi detail */
 .materi-detail {
-  margin-top: 20px; /* kecilkan jarak atas */
+  margin-top: 20px;
   padding: 0 15px;
 }
 
-/* Judul materi */
 .materi-detail h2 {
-  margin-bottom: 10px; /* beri jarak tipis ke video */
+  margin-bottom: 10px;
   font-size: 2rem;
   color: #0077ff;
   text-align: center;
 }
 
-/* Wrapper video agar responsive 16:9 */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  margin-top: 0; /* hapus jarak atas */
-  margin-bottom: 15px; /* jarak bawah pas */
+  padding-top: 56.25%;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
-/* Video iframe atau video tag */
 .video-wrapper iframe,
 .video-wrapper video {
   position: absolute;
@@ -256,7 +252,6 @@ main {
   display: block;
 }
 
-/* Isi materi di bawah video */
 .materi-text {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -265,7 +260,7 @@ main {
   padding: 20px 25px;
   border-radius: 12px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-  margin-top: 0; /* pastikan tanpa jarak atas */
+  margin-top: 0;
 }
 
 
@@ -291,7 +286,7 @@ main {
 }
 
 .btn-detail {
-  background-color: #0077ff; /* hijau segar */
+  background-color: #0077ff;
   color: white;
   border: none;
   padding: 12px 28px;
@@ -323,7 +318,7 @@ main {
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%;
   margin-bottom: 25px;
 }
 
@@ -348,7 +343,6 @@ main {
 }
 
 
-/* Quiz */
 #quiz-section {
   max-width: 800px;
   margin: 20px auto;
@@ -484,7 +478,6 @@ footer {
   color: #005bb5;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .footer-container {
     flex-direction: column;
@@ -499,7 +492,6 @@ footer {
 }
 
 
-/* Utility */
 .hidden {
   display: none !important;
 }
@@ -537,7 +529,6 @@ footer {
   font-size: 0.95rem;
 }
 
-/* Testimoni */
 .testimoni {
   max-width: 900px;
   margin: 40px auto;
@@ -576,7 +567,6 @@ footer {
   text-align: right;
 }
 
-/* Statistik */
 .statistik {
   max-width: 900px;
   margin: 40px auto;
@@ -664,15 +654,12 @@ footer {
   display: none;
 }
 
-/* NAVBAR STYLE */
-/* === RESET === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* === NAVBAR === */
 nav {
   position: fixed;
   top: 0;
@@ -715,7 +702,6 @@ nav.scrolled {
   color: #005bb5;
 }
 
-/* === RESPONSIVE === */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -752,7 +738,6 @@ nav.scrolled {
   }
 }
 
-/* Navbar Styling dengan Gradient Animasi */
 nav {
     background: linear-gradient(270deg, #0077ff, #00c3ff, #0077ff, #00c3ff);
     background-size: 600% 600%;
@@ -762,7 +747,6 @@ nav {
     font-weight: bold;
 }
 
-/* Animasi gradient */
 @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -775,7 +759,6 @@ nav {
     }
 }
 
-/* Hover Glow */
 nav a:hover {
     color: rgb(255, 255, 255);
     text-shadow: 0 0 10px rgb(255, 255, 255),
@@ -784,13 +767,11 @@ nav a:hover {
 }
 
 
-/* === JARAK KONTEN === */
 body {
   font-family: sans-serif;
-  padding-top: 80px; /* Sesuaikan tinggi navbar */
+  padding-top: 80px;
 }
 
-/* Intro Screen */
 #intro {
     position: fixed;
     top: 0;
@@ -815,27 +796,24 @@ body {
     animation: scaleUp 2s ease forwards;
 }
 
-/* Animasi gradient (dari navbar sebelumnya) */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Animasi teks intro */
 @keyframes scaleUp {
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
 
 
-/* Scrollbar untuk browser berbasis WebKit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
     width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #1e1e2f; /* warna background track */
+    background: #1e1e2f;
     border-radius: 10px;
 }
 
@@ -851,7 +829,6 @@ body {
     box-shadow: 0 0 15px rgba(143, 148, 251, 1);
 }
 
-/* Scrollbar untuk Firefox */
 * {
     scrollbar-width: thin;
     scrollbar-color: #0077ff #ffffff;
