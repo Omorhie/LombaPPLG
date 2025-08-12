@@ -1,42 +1,82 @@
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+// Navbar scroll effect
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("nav");
+  nav.classList.toggle("scrolled", window.scrollY > 50);
+});
 
-// Buat overlay background
-const overlay = document.createElement("div");
-overlay.classList.add("nav-overlay");
-document.body.appendChild(overlay);
+// Hamburger menu toggle
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
 
 menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("show");
-  overlay.classList.toggle("show");
+  navLinks.classList.toggle("active");
 });
 
-overlay.addEventListener("click", () => {
-  navLinks.classList.remove("show");
-  overlay.classList.remove("show");
+window.addEventListener("load", () => {
+    const intro = document.getElementById("intro");
+    setTimeout(() => {
+        intro.style.opacity = "0";
+        intro.style.visibility = "hidden";
+    }, 2500); // Durasi sebelum hilang
 });
+
+
+
+// Saat halaman dimuat, cek halaman terakhir
+window.addEventListener('load', function () {
+    const lastPage = localStorage.getItem('lastPage');
+    if (lastPage) {
+        showPage(lastPage); // Fungsi showPage sudah ada di code-mu
+    } else {
+        showPage('home'); // Default ke home kalau belum ada data
+    }
+});
+
+document.getElementById("btn-mulai").addEventListener("click", function(e) {
+  e.preventDefault(); // supaya gak reload halaman
+  showListMateri();   // panggil fungsi untuk tampilkan daftar materi
+});
+
+
+
+
 
 // Data materi
 const materiData = [
   {
     id: 1,
     judul: "Pengantar JavaScript",
-    isi: "JavaScript adalah bahasa pemrograman yang digunakan untuk membuat halaman web menjadi interaktif.",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4"
+    isi: "JavaScript adalah bahasa pemrograman yang berjalan di browser dan memungkinkan halaman web menjadi interaktif dan dinamis. Dengan JavaScript, kamu bisa membuat elemen web merespon aksi pengguna seperti klik, mengubah konten secara real-time, memvalidasi form, serta membuat animasi dan efek visual. JavaScript juga digunakan di sisi server dengan platform seperti Node.js, sehingga fleksibel untuk pengembangan aplikasi full-stack.",
+    video: "https://www.youtube.com/embed/RUTV_5m4VeI"
   },
   {
     id: 2,
     judul: "Dasar HTML",
-    isi: "HTML adalah bahasa markup yang digunakan untuk membuat struktur halaman web.",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4"
+    isi: "HTML (HyperText Markup Language) adalah bahasa markup standar yang digunakan untuk membuat dan menyusun konten di halaman web. HTML berfungsi sebagai kerangka dasar yang mengatur elemen-elemen seperti teks, gambar, tautan, dan multimedia agar dapat ditampilkan oleh browser. Dengan memahami dasar HTML, kamu bisa membangun struktur halaman web yang terorganisir dan siap untuk diberi gaya serta interaktivitas menggunakan CSS dan JavaScript.",
+    video: "https://www.youtube.com/embed/0oA1Z6UKM5M"
   },
   {
     id: 3,
-    judul: "CSS untuk Styling",
-    isi: "CSS digunakan untuk mendesain tampilan halaman web supaya menarik.",
-    video: "https://www.w3schools.com/html/mov_bbb.mp4"
+    judul: "CSS Untuk Styling",
+    isi: "CSS (Cascading Style Sheets) adalah bahasa yang digunakan untuk mengatur tampilan dan layout halaman web. Dengan CSS, kamu bisa mengubah warna, font, ukuran, posisi, dan efek visual elemen HTML agar website terlihat menarik dan responsif di berbagai perangkat. CSS bekerja berdampingan dengan HTML untuk memisahkan konten dan desain, sehingga memudahkan pengelolaan dan pengembangan tampilan web.",
+    video: "https://www.youtube.com/embed/V-DD30lGAL0"
+  },
+    {
+    id: 4,
+    judul: "PHP Untuk Backend",
+    isi: "PHP adalah bahasa pemrograman server-side yang populer digunakan untuk mengembangkan aplikasi web dinamis dan backend website. PHP memungkinkan server untuk memproses data, berinteraksi dengan database, dan mengirimkan konten yang dihasilkan ke browser pengguna secara dinamis. Karena kemudahan penggunaannya dan dukungan luas dari banyak hosting, PHP banyak dipakai untuk membuat website, API, dan sistem manajemen konten.",
+    video: "https://www.youtube.com/embed/Ak6VTSekGP4"
+  },
+    {
+    id: 5,
+    judul: "Python Bahasa Pemrograman Serba Guna dan Mudah Dipelajari",
+    isi: "Python adalah bahasa pemrograman tingkat tinggi yang terkenal dengan sintaksnya yang sederhana dan mudah dipahami. Python banyak digunakan untuk berbagai keperluan mulai dari pengembangan web, analisis data, kecerdasan buatan, otomatisasi, hingga pengembangan aplikasi desktop. Komunitas besar dan banyaknya pustaka (library) membuat Python sangat fleksibel dan populer di kalangan programmer pemula maupun profesional.",
+    video: "https://www.youtube.com/embed/n0tURC_xeyI"
   }
 ];
+
+
+
 
 // DOM references
 const listMateriSection = document.getElementById("materi-list");
@@ -137,20 +177,39 @@ function showMateriDetail(materi) {
 
   judulMateri.textContent = materi.judul;
   isiMateri.textContent = materi.isi;
-  videoMateri.querySelector("source").src = materi.video;
-  videoMateri.load();
+
+  const videoWrapper = document.getElementById("video-wrapper");
+  videoWrapper.innerHTML = `
+    <iframe width="560" height="315" 
+      src="${materi.video}" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen 
+      title="${materi.judul}">
+    </iframe>
+  `;
 }
 
-// Quiz Data
+// Data quiz (jika sudah ada, gunakan yang ini atau gabungkan)
 const quizData = [
   {
     question: "Apa kepanjangan dari HTML?",
-    options: ["HyperText Markup Language", "Hyperlink Text Mark Language", "Home Tool Markup Language", "HyperText Markdown Language"],
+    options: [
+      "HyperText Markup Language",
+      "Hyperlink Text Mark Language",
+      "Home Tool Markup Language",
+      "HyperText Markdown Language"
+    ],
     answer: "HyperText Markup Language"
   },
   {
     question: "Apa fungsi CSS dalam web?",
-    options: ["Memberi gaya pada halaman web", "Menambah interaktivitas", "Menyimpan data", "Menjalankan server"],
+    options: [
+      "Memberi gaya pada halaman web",
+      "Menambah interaktivitas",
+      "Menyimpan data",
+      "Menjalankan server"
+    ],
     answer: "Memberi gaya pada halaman web"
   },
   {
@@ -167,130 +226,236 @@ const quizData = [
     question: "Tag HTML mana yang digunakan untuk membuat paragraf?",
     options: ["<p>", "<div>", "<span>", "<h1>"],
     answer: "<p>"
+  },
+  {
+    question: "Mana yang termasuk tipe data numerik?",
+    options: ["String", "Boolean", "Float", "Array"],
+    answer: "Float"
+  },
+  {
+    question: "Perintah `if` digunakan untuk?",
+    options: [
+      "Mengulangi perintah berkali-kali",
+      "Memilih antara dua atau lebih opsi berdasarkan kondisi",
+      "Mendefinisikan fungsi baru",
+      "Menyimpan data"
+    ],
+    answer: "Memilih antara dua atau lebih opsi berdasarkan kondisi"
+  },
+  {
+    question: "Loop yang digunakan untuk menjalankan perintah selama kondisi bernilai benar adalah?",
+    options: ["if", "switch", "while", "print"],
+    answer: "while"
+  },
+  {
+    question: "Apa itu rekursi dalam pemrograman?",
+    options: [
+      "Fungsi yang memanggil dirinya sendiri",
+      "Variabel khusus",
+      "Perulangan tanpa akhir",
+      "Operator matematika"
+    ],
+    answer: "Fungsi yang memanggil dirinya sendiri"
+  },
+  {
+    question: "Apa itu konsep OOP (Object-Oriented Programming)?",
+    options: [
+      "Pemrograman berbasis objek dan kelas",
+      "Bahasa pemrograman web",
+      "Cara menulis kode tanpa fungsi",
+      "Bahasa markup"
+    ],
+    answer: "Pemrograman berbasis objek dan kelas"
+  },
+  {
+    question: "Apa itu exception handling?",
+    options: [
+      "Menangani error saat program berjalan",
+      "Membuat program lebih cepat",
+      "Menambah gaya pada halaman web",
+      "Menyimpan data ke database"
+    ],
+    answer: "Menangani error saat program berjalan"
+  },
+  {
+    question: "Apa itu algoritma dalam pemrograman?",
+    options: [
+      "Langkah-langkah penyelesaian masalah",
+      "Bahasa pemrograman baru",
+      "Perintah mencetak teks",
+      "Tipe data khusus"
+    ],
+    answer: "Langkah-langkah penyelesaian masalah"
   }
 ];
 
-// Fungsi untuk mengacak elemen array (Fisher-Yates Shuffle)
-function shuffleArray(array) {
-  for(let i = array.length - 1; i > 0; i--){
+
+// helper shuffle (Fisher-Yates)
+function shuffleArray(a) {
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a;
 }
 
+// globals quiz
 let currentQuizIndex = 0;
 let score = 0;
 let shuffledQuizData = [];
 
+// DOM container (harus ada di HTML)
+const quizContainer = document.getElementById("quiz-container");
+
+// render UI dasar quiz (dipanggil setiap start/restart)
+function renderQuizUI() {
+  quizContainer.innerHTML = `
+    <p id="quiz-question"></p>
+    <ul id="quiz-options" style="padding:0; list-style:none; margin-top:10px;"></ul>
+    <div style="margin-top:14px;">
+      <button id="next-question-btn" disabled class="btn-primary">Next</button>
+    </div>
+    <p id="quiz-feedback" style="margin-top:10px;"></p>
+  `;
+
+  // Jangan attach listener di luar; gunakan named handler
+  const nextBtn = document.getElementById("next-question-btn");
+  nextBtn.removeEventListener?.("click", onNextQuestion); // safe-remove (bila didukung)
+  nextBtn.addEventListener("click", onNextQuestion);
+}
+
+// start / restart quiz
 function startQuiz() {
+  // reset state
   score = 0;
   currentQuizIndex = 0;
 
-  shuffledQuizData = [...quizData];
-  shuffleArray(shuffledQuizData);
+  // duplikat dan acak soal
+  shuffledQuizData = shuffleArray([...quizData]);
 
+  // render UI & tampilkan soal pertama
+  renderQuizUI();
   showQuestion();
+  // pastikan section quiz ditampilkan oleh kode navigasimu
 }
 
+// tampilkan soal saat ini
 function showQuestion() {
-  clearQuizFeedback();
+  // ambil elemen yang baru dibuat
+  const questionEl = document.getElementById("quiz-question");
+  const optionsEl = document.getElementById("quiz-options");
+  const nextBtn = document.getElementById("next-question-btn");
+  const feedbackEl = document.getElementById("quiz-feedback");
 
-  const currentQuiz = shuffledQuizData[currentQuizIndex];
+  // safety
+  if (!shuffledQuizData.length) return;
 
-  const options = [...currentQuiz.options];
-  shuffleArray(options);
+  // bersihkan UI
+  optionsEl.innerHTML = "";
+  feedbackEl.textContent = "";
+  nextBtn.disabled = true;
 
-  quizQuestionEl.textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
-  quizOptionsEl.innerHTML = "";
+  const current = shuffledQuizData[currentQuizIndex];
 
-  options.forEach(option => {
+  // acak opsi
+  const options = shuffleArray([...current.options]);
+
+  questionEl.textContent = `Q${currentQuizIndex + 1}. ${current.question}`;
+
+  // buat tombol opsi
+  options.forEach(opt => {
     const li = document.createElement("li");
-    const btn = document.createElement("button");
-    btn.textContent = option;
-    btn.classList.add("quiz-option-btn");
-    btn.addEventListener("click", () => selectAnswer(option, btn));
-    li.appendChild(btn);
-    quizOptionsEl.appendChild(li);
-  });
+    li.style.marginBottom = "8px";
 
-  nextQuestionBtn.disabled = true;
+    const btn = document.createElement("button");
+    btn.className = "quiz-option-btn";
+    btn.type = "button";
+    btn.textContent = opt;
+    btn.style.padding = "10px 14px";
+    btn.style.borderRadius = "8px";
+    btn.style.border = "1px solid rgba(0,0,0,0.06)";
+    btn.style.cursor = "pointer";
+    btn.style.background = "#0077ff";
+    btn.style.color = "white";
+    btn.style.fontWeight = "600";
+
+    // handler pilihan
+    btn.addEventListener("click", () => selectAnswer(btn, opt));
+
+    li.appendChild(btn);
+    optionsEl.appendChild(li);
+  });
 }
 
-function selectAnswer(selectedOption, buttonClicked) {
-  const currentQuiz = shuffledQuizData[currentQuizIndex];
+// ketika user pilih jawaban
+function selectAnswer(buttonClicked, selectedOption) {
+  const current = shuffledQuizData[currentQuizIndex];
+  const feedbackEl = document.getElementById("quiz-feedback");
+  const nextBtn = document.getElementById("next-question-btn");
 
-  // Disable semua tombol dan reset warna dulu
-  document.querySelectorAll(".quiz-option-btn").forEach(btn => {
-    btn.disabled = true;
-    btn.style.backgroundColor = "";
-    btn.style.color = "";
+  // disable semua tombol opsi
+  document.querySelectorAll(".quiz-option-btn").forEach(b => b.disabled = true);
+
+  // reset warna opsi (untuk safety)
+  document.querySelectorAll(".quiz-option-btn").forEach(b => {
+    b.style.opacity = "0.95";
   });
 
-  if(selectedOption === currentQuiz.answer) {
+  if (selectedOption === current.answer) {
     score++;
-    quizFeedback.textContent = "Benar! 🎉";
-    quizFeedback.style.color = "green";
-
-    buttonClicked.style.backgroundColor = "green";
+    feedbackEl.textContent = "Benar! 🎉";
+    feedbackEl.style.color = "green";
+    buttonClicked.style.background = "#28a745"; // hijau
     buttonClicked.style.color = "white";
   } else {
-    quizFeedback.textContent = `Salah! Jawaban benar: ${currentQuiz.answer}`;
-    quizFeedback.style.color = "red";
-
-    buttonClicked.style.backgroundColor = "red";
+    feedbackEl.textContent = `Salah! Jawaban benar: ${current.answer}`;
+    feedbackEl.style.color = "red";
+    buttonClicked.style.background = "#dc3545"; // merah
     buttonClicked.style.color = "white";
-
-    document.querySelectorAll(".quiz-option-btn").forEach(btn => {
-      if(btn.textContent === currentQuiz.answer){
-        btn.style.backgroundColor = "green";
-        btn.style.color = "white";
+    // tandai jawaban benar
+    document.querySelectorAll(".quiz-option-btn").forEach(b => {
+      if (b.textContent === current.answer) {
+        b.style.background = "#28a745";
+        b.style.color = "white";
       }
     });
   }
 
-  nextQuestionBtn.disabled = false;
+  nextBtn.disabled = false;
 }
 
-function clearQuizFeedback() {
-  quizFeedback.textContent = "";
-}
-
-nextQuestionBtn.addEventListener("click", () => {
+// handler next (named so add/remove safe)
+function onNextQuestion() {
   currentQuizIndex++;
-  if(currentQuizIndex < shuffledQuizData.length) {
+  if (currentQuizIndex < shuffledQuizData.length) {
     showQuestion();
   } else {
     showQuizResult();
   }
-});
+}
 
+// tampilkan hasil akhir dan tombol restart
 function showQuizResult() {
-  const quizContainer = document.getElementById("quiz-container");
   quizContainer.innerHTML = `
-    <h3>Quiz selesai!</h3>
-    <p>Skor kamu: ${score} dari ${shuffledQuizData.length}</p>
-    <button id="restart-quiz-btn">Coba Lagi</button>
+    <div>
+      <h3>Quiz selesai!</h3>
+      <p>Skor kamu: <strong>${score}</strong> dari ${shuffledQuizData.length}</p>
+      <div style="margin-top:12px;">
+        <button id="restart-quiz-btn" class="btn-primary">Coba Lagi</button>
+      </div>
+    </div>
   `;
 
-  document.getElementById("restart-quiz-btn").addEventListener("click", () => {
-    quizContainer.innerHTML = `
-      <p id="quiz-question"></p>
-      <ul id="quiz-options"></ul>
-      <button id="next-question-btn" disabled>Next</button>
-      <p id="quiz-feedback"></p>
-    `;
-    // Re-attach event listener tombol next
-    document.getElementById("next-question-btn").addEventListener("click", () => {
-      currentQuizIndex++;
-      if(currentQuizIndex < shuffledQuizData.length) {
-        showQuestion();
-      } else {
-        showQuizResult();
-      }
-    });
+  // attach restart listener (fresh)
+  const restartBtn = document.getElementById("restart-quiz-btn");
+  restartBtn.addEventListener("click", () => {
+    // restart dipastikan membersihkan dan memulai ulang
     startQuiz();
   });
+
+  // (opsional) simpan skor ke server / localStorage di sini
 }
+
 
 // Navigasi
 navHome.addEventListener("click", e => {

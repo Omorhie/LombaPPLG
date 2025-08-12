@@ -7,19 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<nav class="navbar">
-  <div class="container">
-    <div class="logo">EduCoding</div>
+  <div id="intro">
+  <h1 class="intro-text">EduCoding</h1>
+</div>
 
-    <div class="menu-toggle" id="menuToggle">&#9776;</div>
-
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#" id="nav-home">Home</a></li>
-      <li><a href="#" id="nav-materi">Materi</a></li>
-      <li><a href="#" id="nav-quiz">Quiz</a></li>
-    </ul>
+<nav>
+  <div class="logo">EduCoding</div>
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#" id="nav-home">Home</a>
+    <a href="#" id="nav-materi">Materi</a>
+    <a href="#" id="nav-quiz">Quiz</a>
   </div>
 </nav>
+
 
 
 
@@ -27,20 +32,20 @@
 <section id="home-text" class="home-text">
   <h1>Selamat Datang di EduCoding</h1>
   <p class="subtitle">Tempat terbaik untuk belajar coding dengan materi lengkap, video interaktif, dan quiz seru.</p>
-  <a href="#materi-list" class="btn-primary">Mulai Belajar Sekarang</a>
+  <a href="#" id="btn-mulai" class="btn-primary">Mulai Belajar Sekarang</a>
 </section>
 
 
     <section class="carousel-container">
       <div class="carousel">
         <div class="carousel-item">
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1" />
+          <img src="assets/carousel1.jpg" alt="Slide 1" />
         </div>
         <div class="carousel-item">
-          <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2" />
+          <img src="assets/carousel2.jpg" alt="Slide 2" />
         </div>
         <div class="carousel-item">
-          <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3" />
+          <img src="assets/carousel3.jpg" alt="Slide 3" />
         </div>
       </div>
       <button class="prev-btn" aria-label="Previous Slide">&#10094;</button>
@@ -53,20 +58,18 @@
     </section>
 
 <section id="materi-detail" class="materi-detail hidden">
-  <button id="back-btn" class="btn-back">&larr; Kembali ke Daftar Materi</button>
+  <button id="back-btn" class="btn-back">Kembali ke Daftar Materi</button>
   <div class="materi-content">
     <h2 id="materi-detail-title">Judul Materi</h2>
-    <div class="video-wrapper">
-      <video id="materi-video" controls preload="metadata" poster="video-poster.jpg">
-        <source src="" type="video/mp4" />
-        Video tidak didukung oleh browser Anda.
-      </video>
+    <div class="video-wrapper" id="video-wrapper">
+      <!-- iframe video Youtube akan dimasukkan di sini -->
     </div>
     <div id="materi-detail-text" class="materi-text">
       <p>Deskripsi materi dan isi pembelajaran yang lengkap, jelas, dan menarik.</p>
     </div>
   </div>
 </section>
+
 
 
     <section id="quiz-section" class="hidden">
@@ -82,7 +85,7 @@
     <section id="features" class="features">
   <div class="feature-card">
     <h3>Materi Lengkap</h3>
-    <p>Ribuan materi dari dasar sampai tingkat lanjut, lengkap dan mudah dipahami.</p>
+    <p>Beberapa materi dari dasar sampai tingkat lanjut, lengkap dan mudah dipahami.</p>
   </div>
   <div class="feature-card">
     <h3>Video Pembelajaran</h3>
@@ -122,11 +125,11 @@
   <h2>Statistik Kami</h2>
   <div class="statistik-cards">
     <div class="stat-card">
-      <h3>500+</h3>
+      <h3>5</h3>
       <p>Materi</p>
     </div>
     <div class="stat-card">
-      <h3>1000+</h3>
+      <h3>500+</h3>
       <p>Pengguna</p>
     </div>
     <div class="stat-card">
@@ -178,12 +181,12 @@
     </div>
     <div class="footer-right">
       <h4>Kontak Kami</h4>
-      <p>Email: support@educoding.id</p>
+      <p>Email: support@educoding.com</p>
       <p>Telp: +62 812 3456 7890</p>
       <div class="social-media">
-        <a href="#" aria-label="Facebook" title="Facebook">📘</a>
-        <a href="#" aria-label="Twitter" title="Twitter">🐦</a>
-        <a href="#" aria-label="Instagram" title="Instagram">📸</a>
+        <a href="#" aria-label="Facebook" title="Facebook">@Youtube</a>
+        <a href="#" aria-label="Twitter" title="Twitter">@Twitter</a>
+        <a href="#" aria-label="Instagram" title="Instagram">@Instagram</a>
       </div>
     </div>
   </div>
